@@ -48,6 +48,9 @@ workflows:
           type: approval
           requires:
             - plan-apply
+          filters:
+            branches:
+              only: main
       - apply:
           context:
             - Terraform State
