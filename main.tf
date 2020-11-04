@@ -12,7 +12,7 @@ resource "github_repository" "this_repository" {
   default_branch = "main"
 }
 
-resource "github_repository" "this_repository" {
+resource "github_repository" "project_a" {
   name        = "project_a"
   description = "Example project repo"
 
