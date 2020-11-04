@@ -11,6 +11,19 @@ which we will pass in as the following environment variables:
 Made a new PAT via https://github.com/settings/tokens/new with
 the minimal permissions needed to run this.
 
+Because I'd made this repo before I wrote terraform resources to manage it, 
+I had to import the original repo into the terraform state:
+```
+terraform import github_repository.this_repository fastrobot_demo_github_org
+...
+github_repository.this_repository: Importing from ID "fastrobot_demo_github_org"...
+github_repository.this_repository: Import prepared!
+  Prepared github_repository for import
+github_repository.this_repository: Refreshing state... [id=fastrobot_demo_github_org]
+
+Import successful!
+``` 
+
 #### References
 
 Some examples taken from:
