@@ -33,32 +33,6 @@ jobs:
           paths:
             - .
 
-  plan-destroy:
-    docker:
-      - image: hashicorp/terraform:0.13.5
-    steps:
-      - attach_workspace:
-          at: .
-      - run:
-          name: terraform create destroy plan
-          command: |
-            terraform plan -destroy -out tfdestroy -var-file variables.tfvars
-      - persist_to_workspace:
-          root: .
-          paths:
-            - .
-
-  destroy:
-    docker:
-      - image: hashicorp/terraform:0.13.5
-    steps:
-      - attach_workspace:
-          at: .
-      - run:
-          name: terraform destroy
-          command: |
-            terraform apply -auto-approve tfdestroy
-
 workflows:
   version: 2
   plan_approve_apply:
@@ -74,28 +48,15 @@ workflows:
           type: approval
           requires:
             - plan-apply
+          filters:
+            branches:
+              only: main
       - apply:
           context:
             - Terraform State
             - Github Admin
           requires:
             - hold-apply
-      - plan-destroy:
-          context:
-            - Terraform State
-            - Github Admin
-          requires:
-            - apply
-      - hold-destroy:
-          context:
-            - Terraform State
-            - Github Admin
-          type: approval
-          requires:
-            - plan-destroy
-      - destroy:
-          context:
-            - Terraform State
-            - Github Admin
-          requires:
-            - hold-destroy
+          filters:
+            branches:
+              only: main

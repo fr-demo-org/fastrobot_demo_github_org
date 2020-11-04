@@ -1,5 +1,5 @@
 variable "github_organization" {
-  type = string
+  type    = string
   default = "fr-demo-org"
 }
 
