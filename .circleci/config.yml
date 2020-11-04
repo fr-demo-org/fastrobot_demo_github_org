@@ -63,21 +63,39 @@ workflows:
   version: 2
   plan_approve_apply:
     jobs:
-      - plan-apply
+      - plan-apply:
+          context:
+            - Terraform State
+            - Github Admin
       - hold-apply:
+          context:
+            - Terraform State
+            - Github Admin
           type: approval
           requires:
             - plan-apply
       - apply:
+          context:
+            - Terraform State
+            - Github Admin
           requires:
             - hold-apply
       - plan-destroy:
+          context:
+            - Terraform State
+            - Github Admin
           requires:
             - apply
       - hold-destroy:
+          context:
+            - Terraform State
+            - Github Admin
           type: approval
           requires:
             - plan-destroy
       - destroy:
+          context:
+            - Terraform State
+            - Github Admin
           requires:
             - hold-destroy
