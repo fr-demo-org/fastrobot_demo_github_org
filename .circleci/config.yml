@@ -54,3 +54,6 @@ workflows:
             - Github Admin
           requires:
             - hold-apply
+          filters:
+            branches:
+              only: main
