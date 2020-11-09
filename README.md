@@ -7,6 +7,7 @@ This is a work in progress and is probably at least missing these features:
 * fix the `.circleci/config.yml` to only plan on PR and plan/apply on merge to master
 * badges/links to CircleCI
 * add https://www.terraform.io/docs/providers/github/r/branch_protection.html to enforce CI and approvers
+* tests: add an inspec or similar assertion that we haven't locked everybody out of admin, repos are still private, etc
 
 #### Secrets
 To run, we need to set secrets in CircleCI using the `contexts` feature, 

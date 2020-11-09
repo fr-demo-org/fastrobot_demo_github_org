@@ -13,6 +13,9 @@ jobs:
           command: |
             terraform init -input=false
             terraform plan -out tfapply
+      - run:
+          name: terraform show plan for comment
+          command: terraform show -no-color > tfplan.txt
       - persist_to_workspace:
           root: .
           paths:
@@ -33,6 +36,28 @@ jobs:
           paths:
             - .
 
+  plan_comment:
+    docker:
+      - image: cloudposse/github-commenter:0.8.0
+    working_directory: /code
+    steps:
+      - checkout
+      - attach_workspace:
+          at: /code
+      - run:
+          name: Post plan to PR comment
+          command: |-
+            export GITHUB_TOKEN=${TF_VAR_github_token}
+            export CIRCLE_PR_NUMBER=${CIRCLE_PR_NUMBER:-${CIRCLE_PULL_REQUEST##*/}}
+            if [ -z $CIRCLE_PR_NUMBER ]; then echo "Not a pull request - aborting"; exit 0; fi
+            cat /code/tfplan.txt | github-commenter \
+              -owner ${CIRCLE_PROJECT_USERNAME} \
+              -repo ${CIRCLE_PROJECT_REPONAME} \
+              -number $CIRCLE_PR_NUMBER \
+              -delete-comment-regex "Output from" \
+              -type pr \
+              -template_file /code/.circleci/plan-comment.tpl
+
 workflows:
   version: 2
   plan_approve_apply:
@@ -41,6 +66,11 @@ workflows:
           context:
             - Terraform State
             - Github Admin
+      - plan_comment:
+          context:
+            - Github Admin
+          requires:
+            - plan
       - hold-apply:
           context:
             - Terraform State
