@@ -1,13 +1,21 @@
 ### CircleCI using Terraform to manage our GitHub Organization 
 
+### Status
+
+We expect the `main` branch of this repo to always be applicable.
+
+`main`: [![CircleCI](https://circleci.com/gh/fr-demo-org/fastrobot_demo_github_org.svg?style=svg)](https://circleci.com/gh/fr-demo-org/fastrobot_demo_github_org)
+
 #### TODO
 This is a work in progress and is probably at least missing these features:
 * DONE ~~replace github PAT with a github app for more restricted permissions~~
 * clean up the README and top level files to make it super clear where new users/teams are managed
-* fix the `.circleci/config.yml` to only plan on PR and plan/apply on merge to master
-* badges/links to CircleCI
+* DONE ~~fix the `.circleci/config.yml` to only plan on PR and plan/apply on merge to master~~ plan is 
+uploaded using github-commenter if the commit is part of a PR.  
+* DONE ~~badges/links to CircleCI~~
 * add https://www.terraform.io/docs/providers/github/r/branch_protection.html to enforce CI and approvers
 * tests: add an inspec or similar assertion that we haven't locked everybody out of admin, repos are still private, etc
+* add a slack notification step that happens on "waiting for approval" and "post-deploy"
 
 #### Secrets
 To run, we need to set secrets in CircleCI using the `contexts` feature, 
@@ -51,3 +59,4 @@ Some examples taken from:
 ```
 docker run -i -t -v `pwd`:/workspace -w /workspace hashicorp/terraform:light init
 ```
+after setting the appropriate environment variables and passing them in. 
