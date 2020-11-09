@@ -12,6 +12,19 @@ resource "github_repository" "this_repository" {
   default_branch = "main"
 }
 
+resource "github_repository" "packer_repository" {
+  name        = "fastrobot_demo_image_manager"
+  description = "CircleCI driven packer managing our images"
+
+  visibility    = "public"
+  has_issues    = true
+  has_projects  = true
+  has_wiki      = false
+  has_downloads = false
+
+  default_branch = "main"
+}
+
 resource "github_repository" "project_a" {
   name        = "project_a"
   description = "Example project repo"
