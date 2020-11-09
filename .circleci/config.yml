@@ -2,7 +2,7 @@ version: 2
 # copied from the CircleCI demo hashicorp/learn-terraform-circleci
 
 jobs:
-  plan-apply:
+  plan:
     working_directory: /tmp/project
     docker:
       - image: hashicorp/terraform:0.13.5
@@ -37,7 +37,7 @@ workflows:
   version: 2
   plan_approve_apply:
     jobs:
-      - plan-apply:
+      - plan:
           context:
             - Terraform State
             - Github Admin
@@ -47,7 +47,7 @@ workflows:
             - Github Admin
           type: approval
           requires:
-            - plan-apply
+            - plan
           filters:
             branches:
               only: main

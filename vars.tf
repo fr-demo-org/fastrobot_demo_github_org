@@ -10,7 +10,7 @@ variable "github_token" {
 variable "gh_admins" {
   description = "List with admin users in this GitHub Organization"
   type        = list(string)
-  default     = ["lamont"]
+  default     = ["fr-demo-ci", "lamont"]
 }
 
 variable "gh_users" {
