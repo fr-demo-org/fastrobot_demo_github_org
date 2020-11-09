@@ -47,6 +47,7 @@ jobs:
       - run:
           name: Post plan to PR comment
           command: |-
+            export GITHUB_TOKEN=${TF_VAR_github_token}
             export CIRCLE_PR_NUMBER=${CIRCLE_PR_NUMBER:-${CIRCLE_PULL_REQUEST##*/}}
             if [ -z $CIRCLE_PR_NUMBER ]; then echo "Not a pull request - aborting"; exit 0; fi
             cat /code/tfplan.txt | github-commenter \
