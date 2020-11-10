@@ -18,5 +18,15 @@ terraform {
     dynamodb_table = "fr-personal-account-config-lamont"
     encrypt        = true
   }
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 3.13.0"
+    }
+    github = {
+      source  = "hashicorp/github"
+      version = "~> 4.0.0"
+    }
+  }
 }
 
