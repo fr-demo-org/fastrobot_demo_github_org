@@ -29,9 +29,9 @@ resource "github_branch_protection" "this_repository_branch_protection" {
   //    ]
   //  }
 
-  //  push_restrictions = [
-  //    github_team.admins.node_id, github_team.users.node_id
-  //  ]
+  push_restrictions = [
+    github_team.admins.node_id, github_team.users.node_id
+  ]
 }
 
 resource "github_repository" "packer_repository" {
@@ -47,9 +47,9 @@ resource "github_repository" "packer_repository" {
   default_branch = "main"
 }
 
-resource "github_repository" "project_a" {
-  name        = "project_a"
-  description = "Example project repo"
+resource "github_repository" "repos" {
+  for_each = toset(var.gh_projects)
+  name     = each.key
 
   visibility    = "public"
   has_issues    = true
