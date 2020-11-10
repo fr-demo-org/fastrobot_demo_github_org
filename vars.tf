@@ -16,5 +16,5 @@ variable "gh_admins" {
 variable "gh_users" {
   description = "List with limited users in this GitHub Organization"
   type        = list(string)
-  default     = ["jcookfastrobot"]
+  default     = ["jcookfastrobot", "lamont"]
 }

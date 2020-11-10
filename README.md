@@ -1,10 +1,19 @@
-### CircleCI using Terraform to manage our GitHub Organization 
+## CircleCI driving Terraform to manage our GitHub Organization 
 
 ### Status
 
-We expect the `main` branch of this repo to always be applicable.
+We expect the `main` branch of this repo to always be applicable and correct.
 
 `main`: [![CircleCI](https://circleci.com/gh/fr-demo-org/fastrobot_demo_github_org.svg?style=svg)](https://circleci.com/gh/fr-demo-org/fastrobot_demo_github_org)
+
+### How to use:
+
+Welcome to our org! Our SSO got you access to the github organization, you can now use this repository to add
+yourself to teams and projects, pending an automated review and approval from one of the admins. 
+
+If you'd like to edit team membership, you most likely would want to submit a pull-request 
+against the `vars.tf` file, adding your github username to the `gh_users` team.  Once you submit
+the PR, CircleCI will plan the changes and attach the output to a PR for an admin to review and approve.
 
 #### TODO
 This is a work in progress and is probably at least missing these features:
