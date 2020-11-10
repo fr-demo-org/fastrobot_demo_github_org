@@ -17,21 +17,21 @@ resource "github_branch_protection" "this_repository_branch_protection" {
   pattern        = "main"
   enforce_admins = true
 
-  required_status_checks {
-    strict   = true
-    contexts = ["ci/circleci"]
-  }
+  //  required_status_checks {
+  //    strict   = false
+  //    contexts = ["ci/circleci"]
+  //  }
 
-  required_pull_request_reviews {
-    dismiss_stale_reviews = true
-    dismissal_restrictions = [
-      github_team.admins.node_id
-    ]
-  }
+  //  required_pull_request_reviews {
+  //    dismiss_stale_reviews = true
+  //    dismissal_restrictions = [
+  //      github_team.admins.node_id
+  //    ]
+  //  }
 
-  push_restrictions = [
-    github_team.admins.node_id, github_team.users.node_id
-  ]
+  //  push_restrictions = [
+  //    github_team.admins.node_id, github_team.users.node_id
+  //  ]
 }
 
 resource "github_repository" "packer_repository" {
