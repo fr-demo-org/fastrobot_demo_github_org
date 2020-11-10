@@ -24,12 +24,14 @@ resource "github_branch_protection" "this_repository_branch_protection" {
 
   required_pull_request_reviews {
     dismiss_stale_reviews = true
-    # dismissal_teams       = [github_team.admins.slug]
+    dismissal_restrictions = [
+      github_team.admins.node_id
+    ]
   }
 
-  //  restrictions {
-  //    teams = [github_team.admins.slug, github_team.users.slug]
-  //  }
+  push_restrictions = [
+    github_team.admins.node_id, github_team.users.node_id
+  ]
 }
 
 resource "github_repository" "packer_repository" {
