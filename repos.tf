@@ -12,6 +12,13 @@ resource "github_repository" "this_repository" {
   default_branch = "main"
 }
 
+resource "github_repository_collaborator" "main_collab" {
+  repository = github_repository.this_repository.name
+  for_each   = toset(var.gh_admins)
+  username   = each.key
+  permission = "admin"
+}
+
 resource "github_branch_protection" "this_repository_branch_protection" {
   repository_id  = github_repository.this_repository.node_id
   pattern        = "main"
