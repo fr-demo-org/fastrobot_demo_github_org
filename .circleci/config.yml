@@ -15,7 +15,7 @@ jobs:
             terraform plan -out tfapply
       - run:
           name: terraform show plan for comment
-          command: terraform show -no-color > tfplan.txt
+          command: terraform plan -no-color > tfplan.txt
       - persist_to_workspace:
           root: .
           paths:
