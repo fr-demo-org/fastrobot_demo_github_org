@@ -18,7 +18,7 @@ resource "github_branch_protection" "this_repository_branch_protection" {
   enforce_admins = true
 
   required_status_checks {
-    strict   = true
+    strict   = false
     contexts = ["ci/circleci"]
   }
 
