@@ -20,12 +20,12 @@ terraform {
   }
   required_providers {
     aws = {
-      source = "hashicorp/aws"
+      source  = "hashicorp/aws"
       version = "~> 3.13.0"
     }
     github = {
-      source = "hashicorp/github"
-      version = "~> 3.1.0"
+      source  = "hashicorp/github"
+      version = "~> 4.0.0"
     }
   }
 }
