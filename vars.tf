@@ -22,5 +22,5 @@ variable "gh_users" {
 variable "gh_projects" {
   description = "List of repos to manage"
   type        = list(string)
-  default     = ["project_b", "project_c", "project_d"]
+  default     = ["project_b", "project_c", "project_d", "new_demo_repo"]
 }
