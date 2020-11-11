@@ -54,6 +54,19 @@ resource "github_repository" "packer_repository" {
   default_branch = "main"
 }
 
+resource "github_repository" "chef_repository" {
+  name        = "fastrobot_demo_chef-repo"
+  description = "CircleCI driven chef managing our hosts"
+
+  visibility    = "private"
+  has_issues    = true
+  has_projects  = true
+  has_wiki      = false
+  has_downloads = false
+
+  default_branch = "main"
+}
+
 resource "github_repository" "repos" {
   for_each = toset(var.gh_projects)
   name     = each.key
